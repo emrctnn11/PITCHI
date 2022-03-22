@@ -1,0 +1,36 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .image-card {
+        background-color: #f3f3f3;
+        padding: 0.5rem;
+        border-radius: 1.5rem;
+        margin-bottom: 0.5rem;
+        margin-top: 1rem;
+
+        ion-img {
+            opacity: 0.8;
+            width: 50px;
+        }
+    }
+
+
+    p {
+        color: #1d1d1d;
+    }
+}
+
+
+.wrapper.active {
+    .image-card {
+        background-color: #dd6aca;
+    }
+
+    p {
+        color: #1d1d1d;
+        font-weight: 600;
+    }
+}
