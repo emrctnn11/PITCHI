@@ -33,7 +33,7 @@ export class ListingPage implements OnInit {
 
       {
         id: 2,
-        label: 'Hamburgerler',
+        label: 'Burger',
         image: 'assets/images/burger.png',
         active: false,
       },

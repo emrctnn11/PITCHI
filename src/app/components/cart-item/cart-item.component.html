@@ -1,0 +1,26 @@
+<div class="cart-item">
+    <div class="image">
+        <ion-img [src]="item.image"></ion-img>
+    </div>
+
+    <div class="description">
+        <h3>{{item.name}}</h3>
+        <p><sup>TL</sup>{{item.price | number:'1.2'}}</p>
+    </div>
+
+    <div class="actions">
+        <ion-buttons>
+            <ion-button (click)="increase.emit()">
+                <ion-icon slot="start" name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <div class="counter">{{item.quantity}}</div>
+
+        <ion-buttons>
+            <ion-button (click)="decrease.emit()">
+                <ion-icon slot="start" name="remove"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </div>
+</div>

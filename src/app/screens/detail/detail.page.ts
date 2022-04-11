@@ -27,27 +27,30 @@ export class DetailPage implements OnInit {
     this.food = this.foodService.getFood(this.id);
   }
 
-  addItemToCart(){
-      const cartitem: CartItem = {
+  addItemToCart()
+  {
+      const cartitem: CartItem =
+      {
           id: this.food.id,
           name: this.food.title,
           price: this.food.price,
           image: this.food.image,
           quantity: 1,
-
       };
 
       this.cartService.addToCart(cartitem);
+      this.presentToast();
   }
 
-  async presentToast() {
+  async presentToast()
+  {
       const toast = await this.toastCtrl.create({
-        message: 'Food added to cart',
-        mode: 'ios',
-        duration: 1000,
-        position: 'top',
+          message: 'Sepete eklendi',
+          mode: 'ios',
+          duration: 1000,
+          position: 'top',
       });
-      
+
       toast.present();
   }
 
