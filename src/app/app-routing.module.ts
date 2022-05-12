@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'listing',
-    loadChildren: () => import('./screens/listing/listing.module').then( m => m.ListingPageModule)
+    loadChildren: () => import('./screens/listing/listing.module').then( m => m.ListingPageModule),
   },
   {
     path: 'detail/:id',
@@ -22,10 +24,6 @@ const routes: Routes = [
   {
     path: 'cart',
     loadChildren: () => import('./screens/cart/cart.module').then( m => m.CartPageModule)
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./screens/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'login',
