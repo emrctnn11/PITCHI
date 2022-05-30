@@ -5,12 +5,15 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { userInfo } from 'os';
 import { SupabaseService } from 'src/app/services/supabase.service';
+import { ListingPage } from '../listing/listing.page';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
 })
+
+
 export class LoginPage implements OnInit {
     credentials: FormGroup;
 
@@ -36,14 +39,34 @@ export class LoginPage implements OnInit {
 
         this.supabaseService.signIn(this.credentials.value).then(async user => {
             await loading.dismiss();
-            this.router.navigateByUrl('/listing', {replaceUrl: true});
+            this.router.navigateByUrl('/home/listing', {replaceUrl: true});
         }, async err => {
             await loading.dismiss();
-
-            // AKTIFLESMIYOR!!!!//
             this.showError('Login Failed', err.message);
         });
     }
+
+    async signUp(){
+        const loading = await this.loadingController.create();
+        await loading.present();
+
+        this.supabaseService.signUp(this.credentials.value).then(async data => {
+            await loading.dismiss();
+            this.showError('Signup success', 'Please confirm your email!');
+    
+        }, async err=> {
+            await loading.dismiss();
+            const alert = await this.alertController.create({
+                header: ('Registration failed, You already signed'),
+                message: err.error.msg,
+                buttons: ['OK'],
+            });
+            await alert.present();
+        }
+    )};
+
+
+    
 
     async showError(title, msg) {
         const alert = await this.alertController.create({

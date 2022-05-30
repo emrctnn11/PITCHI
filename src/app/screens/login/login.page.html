@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="action-buttons ion-padding">
-            <ion-button [disabled]="!credentials.valid" size="large" class="login-button" >Giriş Yap</ion-button>
+            <ion-button [disabled]="!credentials.valid" size="large" class="login-button" (click)="login()" >Giriş Yap</ion-button>
             <p>Şifremi unuttum ?</p>
-            <ion-button  class="signup-button" size="large" fill="outline" routerLink="/signup" >Üye Ol</ion-button>
+            <ion-button (click)="signUp()" class="signup-button" size="large" fill="outline" routerLink="/signup" >Üye Ol</ion-button>
         </div>
     </div>
 

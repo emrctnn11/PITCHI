@@ -4,6 +4,7 @@ import { createClient, SupabaseClient, User } from '@supabase/supabase-js';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+const TODO_DB = 'todos';
 @Injectable({
     providedIn: 'root'
 })
@@ -11,6 +12,7 @@ export class SupabaseService {
 
     supabase: SupabaseClient;
     private _currentUser: BehaviorSubject<any> = new BehaviorSubject(null);
+    private _todos: BehaviorSubject<any> = new BehaviorSubject([]);
 
     constructor(private router: Router) { 
         this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, {
@@ -20,7 +22,7 @@ export class SupabaseService {
 
         this.supabase.auth.onAuthStateChange((event, session) => {
             console.log('event: ', event);
-
+            console.log('session:', session);
             if (event == 'SIGNED_IN') {
                 this._currentUser.next(session.user);
             } else {
@@ -65,6 +67,16 @@ export class SupabaseService {
         });
 
         this.router.navigateByUrl('/');
+    }
+
+    async loadTodos(){
+        const query = await this.supabase.from(TODO_DB).select('*');
+        console.log('query', query);
+        this._todos.next(query.data);
+    }
+
+    handleTodosChanged(){
+
     }
 }
 
